@@ -431,6 +431,93 @@
     ======================================== */
     #contact { padding: 6rem 0; text-align: center; }
 
+    /* ========================================
+       CLIENT REVIEWS
+    ======================================== */
+    #reviews { padding: 6rem 0; background: var(--bg2); }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .review-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 2rem;
+      border-radius: 4px;
+      transition: all 0.35s ease;
+      position: relative;
+    }
+
+    .review-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+      box-shadow: 0 16px 48px rgba(212,175,55,0.15), 0 0 0 1px rgba(212,175,55,0.1);
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .review-text {
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 50px; height: 50px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--glass);
+    }
+
+    .author-avatar i {
+      font-size: 1.5rem;
+      color: var(--gold);
+      opacity: 0.8;
+    }
+
+    .author-info h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 0.2rem;
+    }
+
+    .author-info p {
+      font-size: 0.75rem;
+      color: var(--gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ========================================
+       CONTACT
+    ======================================== */
+    #contact { padding: 6rem 0; text-align: center; }
+
     .contact-label {
       font-size: 0.8rem;
       letter-spacing: 4px;
@@ -508,6 +595,7 @@
     ======================================== */
     @media (max-width: 1024px) {
       .projects-grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 768px) {
@@ -516,6 +604,7 @@
       .gold-line { margin: 1rem auto 2rem; }
       .hero-bio { margin: 0 auto 2.5rem; }
       .projects-grid { grid-template-columns: 1fr; }
+      .reviews-grid { grid-template-columns: 1fr; }
       .avatar-frame { width: 200px; height: 200px; }
       .avatar-frame i { font-size: 5rem; }
     }
@@ -642,6 +731,83 @@
             <h3 class="card-title">Web Portfolio Ini</h3>
             <p class="card-desc">Halaman portofolio pribadi dengan tema dark Koenigsegg. Dibangun murni HTML, CSS, dan Vanilla JavaScript tanpa framework.</p>
             <button class="card-btn" onclick="alert('Demo: portofolio Alif — Web Portfolio')">Lihat Proyek</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CLIENT REVIEWS
+  ======================================== -->
+  <section id="reviews">
+    <div class="container">
+      <p class="section-title reveal">Apa Kata <span>Mereka</span></p>
+      <div class="gold-line reveal"></div>
+
+      <div class="reviews-grid reveal">
+        
+        <!-- Review 1 -->
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"Alif adalah developer yang sangat profesional. Hasil kerjanya melebihi ekspektasi dan selalu tepat waktu. Sangat direkomendasikan!"</p>
+          <div class="review-author">
+            <div class="author-avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="author-info">
+              <h4>Budi Santoso</h4>
+              <p>CEO, Tech Startup</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-text">"Desain website yang dibuat Alif sangat modern dan user-friendly. Komunikasi lancar dan responsif terhadap feedback."</p>
+          <div class="review-author">
+            <div class="author-avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="author-info">
+              <h4>Siti Nurhaliza</h4>
+              <p>Marketing Director</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="review-card">
+          <div class="review-stars">
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star"></i>
+            <i class="fa-solid fa-star-half-alt"></i>
+          </div>
+          <p class="review-text">"Pengerjaan cepat dan hasil berkualitas tinggi. Alif sangat detail-oriented dan memberikan solusi kreatif untuk setiap masalah."</p>
+          <div class="review-author">
+            <div class="author-avatar">
+              <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="author-info">
+              <h4>Ahmad Rizki</h4>
+              <p>Founder, E-Commerce</p>
+            </div>
           </div>
         </div>
 
