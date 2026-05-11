@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alif Andika — Portfolio</title>
+  <meta name="description" content="Portfolio Alif Andika - Tech Enthusiast & Mahasiswa IT. Web Development, UI/UX, dan eksplorasi coding." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f0d060;
+      --gold-dim: rgba(212,175,55,0.15);
+      --bg: #060606;
+      --bg2: #0e0e0e;
+      --text: #e8e8e8;
+      --text-dim: #888;
+      --glass: rgba(255,255,255,0.04);
+      --glass-border: rgba(212,175,55,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ===== BLUEPRINT GRID BACKGROUND ===== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(212,175,55,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(212,175,55,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== SPEED LINES OVERLAY ===== */
+    #speed-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #000;
+      overflow: hidden;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .speed-line {
+      position: absolute;
+      left: 110%;
+      height: 1px;
+      background: rgba(255,255,255,0.85);
+      animation: shootLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+
+    @keyframes shootLeft {
+      from { left: 110%; }
+      to   { left: -10%; }
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== LAYOUT ===== */
+    section { position: relative; z-index: 1; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ===== GOLD LINE DIVIDER ===== */
+    .gold-line {
+      width: 80px; height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 1rem 0 2rem;
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    .section-title span { color: var(--gold); }
+
+    /* ========================================
+       HERO
+    ======================================== */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* diagonal gold accent */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,175,55,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-text { flex: 1; min-width: 280px; }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-dim);
+      padding: 4px 14px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #fff;
+      text-shadow: 0 0 60px rgba(212,175,55,0.2);
+      min-height: 1.1em;
+    }
+
+    /* glitch effect */
+    .hero-name.glitch {
+      position: relative;
+      animation: glitch-main 2.5s infinite;
+    }
+    .hero-name.glitch::before,
+    .hero-name.glitch::after {
+      content: attr(data-text);
+      position: absolute; top: 0; left: 0;
+      width: 100%;
+    }
+    .hero-name.glitch::before {
+      color: var(--gold);
+      animation: glitch-before 2.5s infinite;
+      clip-path: polygon(0 30%, 100% 30%, 100% 55%, 0 55%);
+    }
+    .hero-name.glitch::after {
+      color: #8ecfff;
+      animation: glitch-after 2.5s infinite;
+      clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+    }
+    @keyframes glitch-main { 0%,94%,100%{transform:none} 95%{transform:skewX(-1deg)} 97%{transform:skewX(1deg)} }
+    @keyframes glitch-before { 0%,94%,100%{transform:none;opacity:0} 95%{transform:translate(-3px,0);opacity:0.8} 97%{transform:translate(3px,0);opacity:0.8} }
+    @keyframes glitch-after  { 0%,94%,100%{transform:none;opacity:0} 95%{transform:translate(3px,0);opacity:0.8} 97%{transform:translate(-3px,0);opacity:0.8} }
+
+    .hero-subtitle {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin: 1rem 0 1.5rem;
+    }
+
+    .hero-bio {
+      font-size: 0.95rem;
+      color: var(--text-dim);
+      line-height: 1.8;
+      max-width: 500px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-block;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 14px 32px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      transition: left 0.4s;
+    }
+    .btn:hover::before { left: 100%; }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #000;
+    }
+    .btn-gold:hover { background: var(--gold-light); box-shadow: 0 0 20px rgba(212,175,55,0.5); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+    }
+    .btn-outline:hover { background: var(--gold-dim); box-shadow: 0 0 20px rgba(212,175,55,0.2); }
+
+    /* hero avatar */
+    .hero-avatar {
+      flex-shrink: 0;
+      position: relative;
+    }
+    .avatar-frame {
+      width: 260px; height: 260px;
+      border: 2px solid var(--gold);
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .avatar-frame::before {
+      content: '';
+      position: absolute;
+      inset: 8px;
+      border: 1px solid rgba(212,175,55,0.3);
+    }
+    .avatar-frame i {
+      font-size: 7rem;
+      color: var(--gold);
+      opacity: 0.7;
+    }
+    /* corner accents */
+    .avatar-frame::after {
+      content: '';
+      position: absolute;
+      top: -6px; right: -6px;
+      width: 20px; height: 20px;
+      border-top: 2px solid var(--gold);
+      border-right: 2px solid var(--gold);
+    }
+    .corner-bl {
+      position: absolute;
+      bottom: -6px; left: -6px;
+      width: 20px; height: 20px;
+      border-bottom: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+    }
+
+    /* ========================================
+       SKILLS
+    ======================================== */
+    #skills { padding: 6rem 0; }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .skill-badge {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border: 1px solid var(--glass-border);
+      background: var(--glass);
+      color: var(--text-dim);
+      cursor: default;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-badge::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold-dim);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .skill-badge:hover {
+      color: var(--gold);
+      border-color: var(--gold);
+      box-shadow: 0 0 16px rgba(212,175,55,0.3), inset 0 0 16px rgba(212,175,55,0.05);
+    }
+    .skill-badge:hover::before { transform: scaleX(1); }
+    .skill-badge span { position: relative; z-index: 1; }
+
+    /* ========================================
+       PROJECTS
+    ======================================== */
+    #projects { padding: 6rem 0; background: var(--bg2); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .project-card {
+      background: var(--glass);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+    }
+
+    /* mini speed line on card hover */
+    .project-card::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: -100%;
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold);
+      box-shadow: 0 16px 48px rgba(212,175,55,0.15), 0 0 0 1px rgba(212,175,55,0.1);
+    }
+    .project-card:hover::after { left: 100%; }
+
+    .card-img {
+      width: 100%; height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    .card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .project-card:hover .card-img img { transform: scale(1.06); }
+
+    /* gold overlay on image */
+    .card-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 50%, rgba(6,6,6,0.9) 100%);
+    }
+
+    .card-body { padding: 1.5rem; }
+
+    .card-tag {
+      font-size: 0.68rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      color: #fff;
+      margin-bottom: 0.6rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .card-btn {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: none;
+      border: 1px solid var(--gold);
+      padding: 8px 20px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .card-btn:hover { background: var(--gold); color: #000; }
+
+    /* ========================================
+       CONTACT
+    ======================================== */
+    #contact { padding: 6rem 0; text-align: center; }
+
+    .contact-label {
+      font-size: 0.8rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .contact-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 2.5rem;
+    }
+    .contact-heading span { color: var(--gold); }
+
+    .contact-icons { display: flex; justify-content: center; gap: 2.5rem; }
+
+    .contact-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: var(--text-dim);
+      transition: all 0.3s;
+    }
+
+    .icon-box {
+      width: 64px; height: 64px;
+      border: 1px solid var(--glass-border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      transition: all 0.3s;
+      background: var(--glass);
+    }
+
+    .contact-icon:hover { color: var(--gold); }
+    .contact-icon:hover .icon-box {
+      border-color: var(--gold);
+      box-shadow: 0 0 20px rgba(212,175,55,0.3);
+      color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .icon-label {
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+    footer {
+      border-top: 1px solid rgba(212,175,55,0.1);
+      padding: 2rem;
+      text-align: center;
+      position: relative; z-index: 1;
+    }
+
+    footer p {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    footer span { color: var(--gold); }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 1024px) {
+      .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .hero-inner { flex-direction: column; text-align: center; }
+      .hero-cta { justify-content: center; }
+      .gold-line { margin: 1rem auto 2rem; }
+      .hero-bio { margin: 0 auto 2.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .avatar-frame { width: 200px; height: 200px; }
+      .avatar-frame i { font-size: 5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== SPEED LINES OVERLAY ===== -->
+  <div id="speed-overlay"></div>
+
+  <!-- ========================================
+       HERO
+  ======================================== -->
+  <section id="hero">
+    <div class="container">
+      <div class="hero-inner">
+
+        <div class="hero-text reveal">
+          <div class="hero-tag">Portfolio — 2026</div>
+
+          <h1 class="hero-name glitch" data-text="ALIF ANDIKA" id="typed-name">
+            ALIF ANDIKA
+          </h1>
+
+          <p class="hero-subtitle">Tech Enthusiast &nbsp;|&nbsp; Mahasiswa IT Pemula</p>
+
+          <p class="hero-bio">
+            Mahasiswa IT pemula yang antusias belajar teknologi baru. Saat ini fokus pada
+            web development, UI/UX, dan explorasi coding. Portofolio ini adalah karya web pertamaku.
+          </p>
+
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-gold">Lihat Karyaku</a>
+            <a href="#contact" class="btn btn-outline">Hubungi Aku</a>
+          </div>
+        </div>
+
+        <!-- Avatar -->
+        <div class="hero-avatar reveal">
+          <div class="avatar-frame">
+            <i class="fa-solid fa-laptop-code"></i>
+            <div class="corner-bl"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       SKILLS
+  ======================================== -->
+  <section id="skills">
+    <div class="container">
+      <p class="section-title reveal">Stack & <span>Tools</span></p>
+      <div class="gold-line reveal"></div>
+
+      <div class="skills-grid reveal">
+        <div class="skill-badge"><span>HTML</span></div>
+        <div class="skill-badge"><span>CSS</span></div>
+        <div class="skill-badge"><span>JavaScript</span></div>
+        <div class="skill-badge"><span>React (Dasar)</span></div>
+        <div class="skill-badge"><span>Git</span></div>
+        <div class="skill-badge"><span>VS Code</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       PROJECTS
+  ======================================== -->
+  <section id="projects">
+    <div class="container">
+      <p class="section-title reveal">Karya <span>Terbaik</span></p>
+      <div class="gold-line reveal"></div>
+
+      <div class="projects-grid">
+
+        <!-- Card 1 -->
+        <div class="project-card reveal">
+          <div class="card-img">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&auto=format&fit=crop&q=80"
+              alt="System GYM Project"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Web App</p>
+            <h3 class="card-title">System GYM</h3>
+            <p class="card-desc">Sistem manajemen gym berbasis web. Fitur pendaftaran member, jadwal latihan, dan monitoring aktivitas anggota.</p>
+            <button class="card-btn" onclick="alert('Demo: portofolio Alif — System GYM')">Lihat Proyek</button>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="project-card reveal">
+          <div class="card-img">
+            <img
+              src="https://images.unsplash.com/photo-1573164713988-8665fc963095?w=600&auto=format&fit=crop&q=80"
+              alt="Tampilan Aplikasi Absensi"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <p class="card-tag">UI/UX Design</p>
+            <h3 class="card-title">Tampilan Aplikasi Absen</h3>
+            <p class="card-desc">Desain antarmuka aplikasi absensi mahasiswa. Tampilan modern dengan fitur clock-in, laporan presensi, dan reward points.</p>
+            <button class="card-btn" onclick="alert('Demo: portofolio Alif — Aplikasi Absen')">Lihat Proyek</button>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="project-card reveal">
+          <div class="card-img">
+            <img
+              src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format&fit=crop&q=80"
+              alt="Web Portfolio"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body">
+            <p class="card-tag">Portfolio</p>
+            <h3 class="card-title">Web Portfolio Ini</h3>
+            <p class="card-desc">Halaman portofolio pribadi dengan tema dark Koenigsegg. Dibangun murni HTML, CSS, dan Vanilla JavaScript tanpa framework.</p>
+            <button class="card-btn" onclick="alert('Demo: portofolio Alif — Web Portfolio')">Lihat Proyek</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       CONTACT
+  ======================================== -->
+  <section id="contact">
+    <div class="container">
+      <p class="contact-label reveal">Ayo Berkolaborasi</p>
+      <h2 class="contact-heading reveal">Hubungi <span>Aku</span> Di</h2>
+
+      <div class="contact-icons reveal">
+
+        <a href="mailto:alifandikaramadhani@gmail.com" class="contact-icon">
+          <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+          <span class="icon-label">Email</span>
+        </a>
+
+        <a href="#" class="contact-icon" onclick="alert('GitHub: github.com/alifandika'); return false;">
+          <div class="icon-box"><i class="fa-brands fa-github"></i></div>
+          <span class="icon-label">GitHub</span>
+        </a>
+
+        <a href="#" class="contact-icon" onclick="alert('Instagram: @alifandika'); return false;">
+          <div class="icon-box"><i class="fa-brands fa-instagram"></i></div>
+          <span class="icon-label">Instagram</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================
+       FOOTER
+  ======================================== -->
+  <footer>
+    <p>© 2026 <span>Alif Andika</span> — Inspired by Koenigsegg</p>
+  </footer>
+
+  <!-- ========================================
+       JAVASCRIPT
+  ======================================== -->
+  <script>
+    /* ---- 1. SPEED LINES ON LOAD ---- */
+    (function() {
+      const overlay = document.getElementById('speed-overlay');
+      const COUNT = 28;
+
+      for (let i = 0; i < COUNT; i++) {
+        const line = document.createElement('div');
+        line.classList.add('speed-line');
+
+        const topPct  = Math.random() * 100;
+        const width   = Math.random() * 300 + 80;      // 80–380 px
+        const delay   = Math.random() * 0.35;           // stagger
+        const dur     = 0.4 + Math.random() * 0.25;    // 0.4–0.65 s
+        const opacity = 0.3 + Math.random() * 0.7;
+
+        line.style.cssText = `
+          top: ${topPct}%;
+          width: ${width}px;
+          opacity: ${opacity};
+          animation-delay: ${delay}s;
+          animation-duration: ${dur}s;
+        `;
+        overlay.appendChild(line);
+      }
+
+      // Fade out overlay after animation completes
+      setTimeout(() => {
+        overlay.style.opacity = '0';
+        setTimeout(() => { overlay.style.display = 'none'; }, 300);
+      }, 900);
+    })();
+
+    /* ---- 2. SCROLL REVEAL (Intersection Observer) ---- */
+    (function() {
+      const reveals = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      reveals.forEach(el => io.observe(el));
+    })();
+
+    /* ---- 3. SMOOTH SCROLL for CTA buttons ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', e => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
